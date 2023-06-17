@@ -21,3 +21,21 @@
 .divAlgorithmDescription {
     font-size: 15px;
 }
+
+.divParamSelectionTitle {
+    color: $color-theme;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.spaceParamsWrapper {
+    padding: 20px;
+    align-items: flex-start;
+    background-color: rgb(223, 231, 237);
+    border: 1px solid #999;
+}
+
+.divParamsGroupTitle{
+    color: $color-theme;
+    font-size: 18px;
+}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Space, Button, Table, Radio } from "antd";
+import { Space, Button, Table, Radio, Checkbox } from "antd";
 import type { ColumnsType } from "antd/es/table";
+import type { CheckboxValueType } from "antd/es/checkbox/Group";
 import styles from "./DataInput.module.scss";
 
 type FragmentId = "READ_DATA" | "CONFIG_ALGORITHM" | "CONFIG_PARAMS";
@@ -77,10 +78,63 @@ const ConfigAlgorithm: React.FC<ConfigAlgorithmProps> = (
     );
 };
 
+interface ConfigParamsProps {
+    valuesL: number[];
+    valuesR: number[];
+    onChangeL: (values: CheckboxValueType[]) => void;
+    onChangeR: (values: CheckboxValueType[]) => void;
+}
+
+const ConfigParams: React.FC<ConfigParamsProps> = (
+    props: ConfigParamsProps
+) => {
+    return (
+        <Space size={20}>
+            <Space direction="vertical">
+                <div className={styles.divParamSelectionTitle}>参数选择</div>
+                <Space className={styles.spaceParamsWrapper} size={100}>
+                    <Space direction="vertical">
+                        <div className={styles.divParamsGroupTitle}>
+                            边连接参数
+                        </div>
+                        <Checkbox.Group
+                            value={props.valuesL}
+                            onChange={props.onChangeL}>
+                            <Space direction="vertical">
+                                <Checkbox value={0}>Dropout 1</Checkbox>
+                            </Space>
+                        </Checkbox.Group>
+                    </Space>
+
+                    <Space direction="vertical">
+                        <div className={styles.divParamsGroupTitle}>
+                            数值参数
+                        </div>
+                        <Checkbox.Group
+                            value={props.valuesR}
+                            onChange={props.onChangeR}>
+                            <Space direction="vertical">
+                                <Checkbox value={0}>高斯分布1均值</Checkbox>
+                                <Checkbox value={1}>高斯分布2均值</Checkbox>
+                                <Checkbox value={2}>高斯分布3方差</Checkbox>
+                            </Space>
+                        </Checkbox.Group>
+                    </Space>
+                </Space>
+            </Space>
+
+            <img src="./params.png" width={300}/>
+        </Space>
+    );
+};
+
 const DataInput: React.FC = () => {
     const [fragmentId, setFragmentId] = useState<FragmentId>("READ_DATA");
 
     const [currentAlgorithm, setCurrentAlgorithm] = useState(0);
+
+    const [paramsOptionsL, setParamsOptionsL] = useState<number[]>([]);
+    const [paramsOptionsR, setParamsOptionsR] = useState<number[]>([]);
 
     const getDataInputFragment = () => {
         switch (fragmentId) {
@@ -94,7 +148,14 @@ const DataInput: React.FC = () => {
                     />
                 );
             case "CONFIG_PARAMS":
-                return 0;
+                return (
+                    <ConfigParams
+                        valuesL={paramsOptionsL}
+                        valuesR={paramsOptionsR}
+                        onChangeL={e => setParamsOptionsL(e as number[])}
+                        onChangeR={e => setParamsOptionsR(e as number[])}
+                    />
+                );
         }
     };
 
