@@ -1,36 +1,81 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Space, Button, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import styles from "./Evaluation.module.scss";
+import * as ECharts from "echarts";
+import { readCsvStringToTable } from "../../utils/csv-table";
 
 type FragmentId = "EXECUTION_RESULTS" | "PARAM_EFFECTS";
 
-const ExecutionResults: React.FC = () => {
-    const columns: ColumnsType<object> = [
-        {
-            title: "A",
-            dataIndex: "a",
-            key: "a"
-        }
-    ];
-
-    const data = [{ a: 123 }];
-
-    return <Table columns={columns} dataSource={data} />;
+interface ExecutionResultsProps {
+    columns: ColumnsType<object>;
+    data: object[];
+}
+const ExecutionResults: React.FC<ExecutionResultsProps> = (
+    props: ExecutionResultsProps
+) => {
+    return (
+        <Table
+            columns={props.columns}
+            dataSource={props.data}
+            pagination={false}
+            size="small"
+        />
+    );
 };
 
 const ParamEffects: React.FC = () => {
-    return <Space></Space>;
+    // const isChartsInitialized = useRef<boolean[]>([false, false, false]);
+    // const charts = useRef<(ECharts.ECharts | null)[]>([null, null, null]);
+    // const divChart1 = useRef<HTMLDivElement>(null);
+    // const divChart2 = useRef<HTMLDivElement>(null);
+    // const divChart3 = useRef<HTMLDivElement>(null);
+
+    // useEffect(() => {
+    //     if (divChart1.current !== null) {
+    //         charts.current[0]=ECharts.init();
+    //     }
+    // }, []);
+
+    return (
+        <Space>
+            {/* <div ref={divChart1} />
+            <div ref={divChart2} />
+            <div ref={divChart3} /> */}
+
+            <img src="./chart1.png" width={350} />
+            <img src="./chart2.png" width={350} />
+            <img src="./chart3.png" width={350} />
+        </Space>
+    );
 };
 
 const Evaluation: React.FC = () => {
     const [fragmentId, setFragmentId] =
         useState<FragmentId>("EXECUTION_RESULTS");
 
+    const [tableColumns, setTableColumns] = useState<ColumnsType<object>>([]);
+    const [tableData, setTableData] = useState<object[]>([]);
+
+    useEffect(() => {
+        const fetchCsv = async () => {
+            const tableCsv = await fetch("./table.csv");
+            const tableCsvString = await tableCsv.text();
+            readCsvStringToTable(tableCsvString, ({ columns, data }) => {
+                setTableColumns(columns);
+                setTableData(data);
+            });
+        };
+
+        fetchCsv();
+    });
+
     const getDataInputFragment = () => {
         switch (fragmentId) {
             case "EXECUTION_RESULTS":
-                return <ExecutionResults />;
+                return (
+                    <ExecutionResults columns={tableColumns} data={tableData} />
+                );
             case "PARAM_EFFECTS":
                 return <ParamEffects />;
         }

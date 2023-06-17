@@ -15,7 +15,7 @@ interface ReadDataProps {
 }
 const ReadData: React.FC<ReadDataProps> = (props: ReadDataProps) => {
     return (
-        <Space direction="vertical">
+        <Space direction="vertical" className={styles.spaceReadDataWrapper}>
             <Button icon={<UploadOutlined />} onClick={props.onImportClick}>
                 导入csv文件
             </Button>
