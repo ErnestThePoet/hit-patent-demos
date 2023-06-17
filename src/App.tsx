@@ -4,6 +4,7 @@ import styles from "./App.module.scss";
 
 import { Layout, Tabs } from "antd";
 import type { TabsProps } from "antd";
+import DataInput from "./components/DataInput/DataInput";
 
 const { Header, Content } = Layout;
 
@@ -11,7 +12,7 @@ const tabItems: TabsProps["items"] = [
     {
         key: "0",
         label: "输入",
-        children: `Content of Tab Pane 1`
+        children: <DataInput />
     },
     {
         key: "1",
