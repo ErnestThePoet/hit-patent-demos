@@ -1,7 +1,7 @@
-$header-height: 64px;
+@import "./styles/common.scss";
 
 .header {
-    background-color: rgb(132, 122, 244);
+    background-color: $color-theme;
     height: $header-height;
 }
 
