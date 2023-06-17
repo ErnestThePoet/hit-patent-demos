@@ -1,0 +1,17 @@
+﻿Specification,,,,Weather,,Camera,,Monitor,
+algorithm,representation,initialization,penalty,error rate,time (s),error rate,time (s),error rate,time (s)
+CTD,none,none,none,0.0232,292.5,0.128,2,0.22,2.13
+CTD,BRM,none,none,0.3406,506,0.13,3.875,0.1657,4.16
+CTD,IBRM,random,penalty,none,none,0.128,5.75,0.236,2.53
+CTD,IBRM,warmstart,none,0.0044,691,0.128,4.5,0.2351,2.5
+CTD,IBRM,warmstart,penalty,0.0044,470,0.127,3.25,0.1457,3.541
+IATD,none,none,none,0.267,42.54,0.2257,0.18,0.1,0.29
+IATD,BRM,none,none,0.1878,1708.8,0.192,121.2,0.175,7.2
+IATD,IBRM,random,penalty,0.188,1984.8,0.192,12,0.175,7.2
+IATD,IBRM,warmstart,none,none,none,none,none,0.175,9.6
+IATD,IBRM,warmstart,penalty,0.1878,1795.2,0.192,37.8,0.175,7.2
+DART,none,none,none,0.3811,7057.09,0.2817,17.51,0.1436,25.19
+DART,BRM,none,none,0.551,9202.4,0.27,60,0.4228,52.8
+DART,IBRM,random,penalty,0.551,8040.3,0.27,52,0.4228,31.2
+DART,IBRM,warmstart,none,0.404,8792,0.24,36,0.4228,28.8
+DART,IBRM,warmstart,penalty,0.372,7681.3,0.2,32,0.4228,27.9
