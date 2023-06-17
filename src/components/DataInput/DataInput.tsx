@@ -1,23 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Space, Button, Table, Radio, Checkbox } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
 import type { ColumnsType } from "antd/es/table";
 import type { CheckboxValueType } from "antd/es/checkbox/Group";
 import styles from "./DataInput.module.scss";
+import { readCsvToTable } from "../../utils/csv-table";
 
 type FragmentId = "READ_DATA" | "CONFIG_ALGORITHM" | "CONFIG_PARAMS";
 
-const ReadData: React.FC = () => {
-    const columns: ColumnsType<object> = [
-        {
-            title: "A",
-            dataIndex: "a",
-            key: "a"
-        }
-    ];
+interface ReadDataProps {
+    columns: ColumnsType<object>;
+    data: object[];
+    onImportClick: () => void;
+}
+const ReadData: React.FC<ReadDataProps> = (props: ReadDataProps) => {
+    return (
+        <Space direction="vertical">
+            <Button icon={<UploadOutlined />} onClick={props.onImportClick}>
+                导入csv文件
+            </Button>
 
-    const data = [{ a: 123 }];
-
-    return <Table columns={columns} dataSource={data} />;
+            {props.data.length > 0 && (
+                <Table
+                    columns={props.columns}
+                    dataSource={props.data}
+                    pagination={false}
+                    size="small"
+                />
+            )}
+        </Space>
+    );
 };
 
 interface ConfigAlgorithmProps {
@@ -147,7 +159,12 @@ const ConfigParams: React.FC<ConfigParamsProps> = (
 };
 
 const DataInput: React.FC = () => {
+    const inCsv = useRef<HTMLInputElement>(null);
+
     const [fragmentId, setFragmentId] = useState<FragmentId>("READ_DATA");
+
+    const [tableColumns, setTableColumns] = useState<ColumnsType<object>>([]);
+    const [tableData, setTableData] = useState<object[]>([]);
 
     const [currentAlgorithm, setCurrentAlgorithm] = useState(0);
 
@@ -157,7 +174,17 @@ const DataInput: React.FC = () => {
     const getDataInputFragment = () => {
         switch (fragmentId) {
             case "READ_DATA":
-                return <ReadData />;
+                return (
+                    <ReadData
+                        columns={tableColumns}
+                        data={tableData}
+                        onImportClick={() => {
+                            if (inCsv.current !== null) {
+                                inCsv.current.click();
+                            }
+                        }}
+                    />
+                );
             case "CONFIG_ALGORITHM":
                 return (
                     <ConfigAlgorithm
@@ -178,46 +205,87 @@ const DataInput: React.FC = () => {
     };
 
     return (
-        <Space direction="vertical" className={styles.spaceWrapper}>
-            <Space size={50} className={styles.spaceButtonsWrapper}>
-                <Button
-                    type={fragmentId === "READ_DATA" ? "default" : "primary"}
-                    className={styles.btnFragmentSelector}
-                    onClick={() => setFragmentId("READ_DATA")}>
-                    读取数据
-                </Button>
+        <>
+            <Space direction="vertical" className={styles.spaceWrapper}>
+                <Space size={50} className={styles.spaceButtonsWrapper}>
+                    <Button
+                        type={
+                            fragmentId === "READ_DATA" ? "default" : "primary"
+                        }
+                        className={styles.btnFragmentSelector}
+                        onClick={() => setFragmentId("READ_DATA")}>
+                        读取数据
+                    </Button>
 
-                <Button
-                    type={
-                        fragmentId === "CONFIG_ALGORITHM"
-                            ? "default"
-                            : "primary"
-                    }
-                    className={styles.btnFragmentSelector}
-                    onClick={() => setFragmentId("CONFIG_ALGORITHM")}>
-                    配置算法
-                </Button>
+                    <Button
+                        type={
+                            fragmentId === "CONFIG_ALGORITHM"
+                                ? "default"
+                                : "primary"
+                        }
+                        className={styles.btnFragmentSelector}
+                        onClick={() => setFragmentId("CONFIG_ALGORITHM")}>
+                        配置算法
+                    </Button>
 
-                <Button
-                    type={
-                        fragmentId === "CONFIG_PARAMS" ? "default" : "primary"
-                    }
-                    className={styles.btnFragmentSelector}
-                    onClick={() => setFragmentId("CONFIG_PARAMS")}>
-                    配置参数
-                </Button>
+                    <Button
+                        type={
+                            fragmentId === "CONFIG_PARAMS"
+                                ? "default"
+                                : "primary"
+                        }
+                        className={styles.btnFragmentSelector}
+                        onClick={() => setFragmentId("CONFIG_PARAMS")}>
+                        配置参数
+                    </Button>
 
-                <Button type="primary" className={styles.btnFragmentSelector}>
-                    保存
-                </Button>
+                    <Button
+                        type="primary"
+                        className={styles.btnFragmentSelector}>
+                        保存
+                    </Button>
 
-                <Button type="primary" className={styles.btnFragmentSelector}>
-                    另存为
-                </Button>
+                    <Button
+                        type="primary"
+                        className={styles.btnFragmentSelector}>
+                        另存为
+                    </Button>
+                </Space>
+
+                {getDataInputFragment()}
             </Space>
 
-            {getDataInputFragment()}
-        </Space>
+            <input
+                ref={inCsv}
+                style={{ display: "none" }}
+                type="file"
+                accept=".csv"
+                multiple
+                onChange={e => {
+                    if (
+                        e.currentTarget === null ||
+                        e.currentTarget.files === null ||
+                        e.currentTarget.files.length === 0
+                    ) {
+                        return;
+                    }
+
+                    readCsvToTable(
+                        e.currentTarget.files[0],
+                        ({ columns, data }) => {
+                            setTableColumns(columns);
+                            setTableData(data);
+                        }
+                    );
+
+                    // clear file value to ensure onchange will be triggered again
+                    // if we load the same file next time.
+                    if (inCsv.current !== null) {
+                        inCsv.current.value = "";
+                    }
+                }}
+            />
+        </>
     );
 };
 
