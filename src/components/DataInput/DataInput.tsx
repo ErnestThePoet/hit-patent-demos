@@ -63,14 +63,14 @@ const ConfigAlgorithm: React.FC<ConfigAlgorithmProps> = (
                 <SingleAlgorithm
                     title="算法2"
                     name="CTD"
-                    description="IATD算法是一种关注数据源影响的数据融合算法"
+                    description="CTD算法是一种关注函数依赖的数据融合算法"
                     value={1}
                 />
 
                 <SingleAlgorithm
                     title="算法3"
                     name="DART"
-                    description="IATD算法是一种关注数据源影响的数据融合算法"
+                    description="DART算法是一种关注多值属性的数据融合算法"
                     value={2}
                 />
             </Space>
@@ -92,7 +92,7 @@ const ConfigParams: React.FC<ConfigParamsProps> = (
         <Space size={20}>
             <Space direction="vertical">
                 <div className={styles.divParamSelectionTitle}>参数选择</div>
-                <Space className={styles.spaceParamsWrapper} size={100}>
+                <Space className={styles.spaceParamsWrapper} size={60}>
                     <Space direction="vertical">
                         <div className={styles.divParamsGroupTitle}>
                             边连接参数
@@ -101,7 +101,12 @@ const ConfigParams: React.FC<ConfigParamsProps> = (
                             value={props.valuesL}
                             onChange={props.onChangeL}>
                             <Space direction="vertical">
-                                <Checkbox value={0}>Dropout 1</Checkbox>
+                                <Checkbox value={0}>
+                                    node "source" dropout
+                                </Checkbox>
+                                <Checkbox value={1}>
+                                    node "entity" dropout
+                                </Checkbox>
                             </Space>
                         </Checkbox.Group>
                     </Space>
@@ -114,16 +119,29 @@ const ConfigParams: React.FC<ConfigParamsProps> = (
                             value={props.valuesR}
                             onChange={props.onChangeR}>
                             <Space direction="vertical">
-                                <Checkbox value={0}>高斯分布1均值</Checkbox>
-                                <Checkbox value={1}>高斯分布2均值</Checkbox>
-                                <Checkbox value={2}>高斯分布3方差</Checkbox>
+                                <Checkbox value={0}>随机游走长度</Checkbox>
+                                <Checkbox value={1}>embedding维度</Checkbox>
+                                <Checkbox value={2}>属性高斯分布均值</Checkbox>
+                                <Checkbox value={3}>属性高斯分布方差</Checkbox>
+                                <Checkbox value={4}>
+                                    属性值高斯分布均值
+                                </Checkbox>
+                                <Checkbox value={5}>
+                                    属性值高斯分布方差
+                                </Checkbox>
+                                <Checkbox value={6}>实体高斯分布均值</Checkbox>
+                                <Checkbox value={7}>实体高斯分布方差</Checkbox>
                             </Space>
                         </Checkbox.Group>
                     </Space>
                 </Space>
             </Space>
 
-            <img src="./params.png" width={300}/>
+            <img
+                src="./mutation.png"
+                width={400}
+                className={styles.imgMutation}
+            />
         </Space>
     );
 };
