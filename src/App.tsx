@@ -5,6 +5,7 @@ import styles from "./App.module.scss";
 import { Layout, Tabs } from "antd";
 import type { TabsProps } from "antd";
 import DataInput from "./components/DataInput/DataInput";
+import Evaluation from "./components/Evaluation/Evaluation";
 
 const { Header, Content } = Layout;
 
@@ -17,7 +18,7 @@ const tabItems: TabsProps["items"] = [
     {
         key: "1",
         label: "评价",
-        children: `Content of Tab Pane 2`
+        children: <Evaluation />
     }
 ];
 
