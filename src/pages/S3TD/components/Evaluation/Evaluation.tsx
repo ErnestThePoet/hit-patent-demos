@@ -43,9 +43,9 @@ const ParamEffects: React.FC = () => {
             <div ref={divChart2} />
             <div ref={divChart3} /> */}
 
-            <img src="./chart1.png" width={350} />
-            <img src="./chart2.png" width={350} />
-            <img src="./chart3.png" width={350} />
+            <img src="./S3TD/chart1.png" width={350} />
+            <img src="./S3TD/chart2.png" width={350} />
+            <img src="./S3TD/chart3.png" width={350} />
         </Space>
     );
 };
@@ -59,7 +59,7 @@ const Evaluation: React.FC = () => {
 
     useEffect(() => {
         const fetchCsv = async () => {
-            const tableCsv = await fetch("./table.csv");
+            const tableCsv = await fetch("./S3TD/table.csv");
             const tableCsvString = await tableCsv.text();
             readCsvStringToTable(tableCsvString, ({ columns, data }) => {
                 setTableColumns(columns);
