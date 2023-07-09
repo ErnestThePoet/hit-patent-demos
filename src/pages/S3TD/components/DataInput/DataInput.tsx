@@ -4,7 +4,7 @@ import { UploadOutlined } from "@ant-design/icons";
 import type { ColumnsType } from "antd/es/table";
 import type { CheckboxValueType } from "antd/es/checkbox/Group";
 import styles from "./DataInput.module.scss";
-import { readCsvFileToTable } from "../../utils/csv-table";
+import { readCsvFileToTable } from "../../../../utils/csv-table";
 
 type FragmentId = "READ_DATA" | "CONFIG_ALGORITHM" | "CONFIG_PARAMS";
 

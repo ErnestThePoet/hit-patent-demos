@@ -3,7 +3,7 @@ import { Space, Button, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import styles from "./Evaluation.module.scss";
 import * as ECharts from "echarts";
-import { readCsvStringToTable } from "../../utils/csv-table";
+import { readCsvStringToTable } from "../../../../utils/csv-table";
 
 type FragmentId = "EXECUTION_RESULTS" | "PARAM_EFFECTS";
 
