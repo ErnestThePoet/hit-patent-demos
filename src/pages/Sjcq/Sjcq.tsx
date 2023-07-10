@@ -4,6 +4,7 @@ import { Layout, Menu } from "antd";
 import type { MenuProps } from "antd";
 import { ConfigProvider } from "antd";
 import DataInput from "./components/DataInput/DataInput";
+import CategorySelect from "./components/CategorySelect/CategorySelect";
 
 const { Header, Content, Sider } = Layout;
 
@@ -27,7 +28,7 @@ const Sjcq: React.FC = () => {
             case "0":
                 return <DataInput />;
             case "1":
-
+                return <CategorySelect />;
             case "2":
 
             case "3":

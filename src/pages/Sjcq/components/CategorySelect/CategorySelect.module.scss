@@ -1,0 +1,21 @@
+.divContentWrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+
+    padding: 60px;
+
+    height: 100%;
+}
+
+.selectCategories{
+    width: 500px;
+}
+
+.btnCategorySelect{
+    width: 100px;
+}
+
+.table{
+    overflow-y: auto;
+}
