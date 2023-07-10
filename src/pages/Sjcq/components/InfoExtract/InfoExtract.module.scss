@@ -1,0 +1,40 @@
+@import "../../styles/common.scss";
+
+.divContentWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    padding: 60px;
+
+    height: 100%;
+}
+
+.spaceLeftRight {
+    width: 40%;
+}
+
+.divTextWrapper {
+    background-color: white;
+    border: 1px solid $color-theme;
+    width: 100%;
+    height: 400px;
+    padding: 15px 20px;
+    font-size: 16px;
+    line-height: 25px;
+    overflow: auto;
+}
+
+.spaceLeftRightBottom {
+    width: 100%;
+    justify-content: space-between;
+}
+
+.btnLeftRight {
+    width: 100px;
+}
+
+.divRightTitle {
+    height: 32px;
+    font-size: 20px;
+}
