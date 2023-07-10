@@ -1,0 +1,32 @@
+@import "./styles/common.scss";
+
+.layoutWrapper{
+    height: 100vh;
+}
+
+.header {
+    background-color: #a9d6ff;
+    height: $header-height;
+    padding: 0;
+    overflow-x: auto;
+}
+
+.divHeaderText {
+    text-align: center;
+
+    color: black;
+    font-size: 25px;
+
+    white-space: pre;
+}
+
+.menuNav{
+    height: 100%;
+}
+
+.contentContent {
+    height: calc(100vh - $header-height);
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 0 20px;
+}
