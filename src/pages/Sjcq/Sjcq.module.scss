@@ -28,5 +28,13 @@
     height: calc(100vh - $header-height);
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.05);
-    padding: 0 20px;
+    padding: 60px;
+}
+
+.inFileName{
+    width: 600px;
+}
+
+.btnDataInput{
+    width: 100px;
 }

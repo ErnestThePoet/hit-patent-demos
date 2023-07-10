@@ -19,16 +19,30 @@ const navItems: MenuProps["items"] = [
 type NavItemKey = "0" | "1" | "2" | "3";
 
 const DataInput: React.FC = () => {
+    const [fileName, setFileName] = useState("1.txt");
     const inCsv = useRef<HTMLInputElement>(null);
 
     return (
         <>
             <Space direction="vertical">
-                <Space>
-                    <Input style={{width:"500px"}} value="1.txt" />
+                <Space size={35}>
+                    <Input
+                        className={styles.inFileName}
+                        value={fileName}
+                        onChange={e => setFileName(e.currentTarget.value)}
+                    />
 
-                    <Button type="primary">浏览</Button>
-                    <Button type="primary">确认</Button>
+                    <Button
+                        className={styles.btnDataInput}
+                        type="primary"
+                        onClick={() => {
+                            inCsv?.current?.click();
+                        }}>
+                        浏览
+                    </Button>
+                    <Button className={styles.btnDataInput} type="primary">
+                        确认
+                    </Button>
                 </Space>
             </Space>
 
@@ -36,8 +50,25 @@ const DataInput: React.FC = () => {
                 ref={inCsv}
                 style={{ display: "none" }}
                 type="file"
-                accept=".txt|.pdf"
+                accept=".txt,.pdf"
                 multiple
+                onChange={e => {
+                    if (
+                        e.currentTarget === null ||
+                        e.currentTarget.files === null ||
+                        e.currentTarget.files.length === 0
+                    ) {
+                        return;
+                    }
+
+                    setFileName(e.currentTarget.files[0].name);
+
+                    // clear file value to ensure onchange will be triggered again
+                    // if we load the same file next time.
+                    if (inCsv.current !== null) {
+                        inCsv.current.value = "";
+                    }
+                }}
             />
         </>
     );
