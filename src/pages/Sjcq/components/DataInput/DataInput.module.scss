@@ -1,0 +1,27 @@
+.divDataInputContentWrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+
+    padding: 60px;
+
+    height: 100%;
+}
+
+.inFileName{
+    width: 600px;
+}
+
+.btnDataInput{
+    width: 100px;
+}
+
+.divFileContent{
+    background-color: white;
+    border: 1px solid #aaa;
+    flex-grow: 1;
+    padding: 15px 20px;
+    font-size: 20px;
+    line-height: 30px;
+    overflow: auto;
+}
