@@ -33,7 +33,7 @@ const InfoExtract: React.FC = () => {
                 className={styles.spaceLeftRight}
                 direction="vertical"
                 size={20}>
-                <Button className={styles.btnLeftRight} type="primary">
+                <Button type="primary">
                     展示原文
                 </Button>
                 <div className={styles.divTextWrapper}>
