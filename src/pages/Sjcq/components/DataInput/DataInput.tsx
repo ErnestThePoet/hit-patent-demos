@@ -8,7 +8,7 @@ const DataInput: React.FC = () => {
 
     return (
         <>
-            <div className={styles.divDataInputContentWrapper}>
+            <div className={styles.divContentWrapper}>
                 <Space size={35}>
                     <Input
                         className={styles.inFileName}
