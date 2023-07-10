@@ -6,6 +6,7 @@ import { ConfigProvider } from "antd";
 import DataInput from "./components/DataInput/DataInput";
 import CategorySelect from "./components/CategorySelect/CategorySelect";
 import InfoExtract from "./components/InfoExtract/InfoExtract";
+import KnowledgeSummary from "./components/KnowledgeSummary/KnowledgeSummary";
 
 const { Header, Content, Sider } = Layout;
 
@@ -33,7 +34,7 @@ const Sjcq: React.FC = () => {
             case "2":
                 return <InfoExtract />;
             case "3":
-                return <></>;
+                return <KnowledgeSummary />;
         }
     };
 

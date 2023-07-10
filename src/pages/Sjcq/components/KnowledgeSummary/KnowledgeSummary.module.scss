@@ -1,0 +1,30 @@
+@import "../../styles/common.scss";
+
+.divContentWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+
+    padding: 60px;
+
+    height: 100%;
+}
+
+.select {
+    width: 350px;
+}
+
+.divTextWrapper {
+    background-color: white;
+    border: 1px solid $color-theme;
+    width: 100%;
+    height: 400px;
+    padding: 15px 20px;
+    font-size: 16px;
+    line-height: 25px;
+    overflow: auto;
+}
+
+.btnKnowledgeSummary {
+    width: 100px;
+}
