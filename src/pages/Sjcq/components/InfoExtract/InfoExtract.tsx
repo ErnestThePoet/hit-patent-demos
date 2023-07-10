@@ -113,7 +113,7 @@ const InfoExtract: React.FC = () => {
 
                             const anchor = document.createElement("a");
                             anchor.href = stringUrl;
-                            anchor.download = "ExtractionResults.txt";
+                            anchor.download = "ExtractionResults1.txt";
 
                             anchor.click();
 
