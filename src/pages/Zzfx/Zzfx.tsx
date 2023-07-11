@@ -4,6 +4,8 @@ import { Button, Layout, Space, Descriptions, Select, Empty } from "antd";
 import { ConfigProvider } from "antd";
 import SelectDataset from "./components/SelectDataset/SelectDataset";
 import InitialValues from "./components/InitialValues/InitialValues";
+import SelectAlgo1 from "./components/SelectAlgo1/SelectAlgo1";
+import SelectAlgo2 from "./components/SelectAlgo2/SelectAlgo2";
 
 const { Header, Content } = Layout;
 
@@ -13,7 +15,9 @@ const Zzfx: React.FC = () => {
     const [fragmentId, setFragmentId] = useState<FragmentId>(0);
 
     const [dataset, setDataset] = useState("");
-    const [initialValues, setInitialValues] = useState("未选择");
+    const [initialValues, setInitialValues] = useState("");
+    const [algo1, setAlgo1] = useState("");
+    const [algo2, setAlgo2] = useState("");
 
     const getFragmentById = (id: FragmentId) => {
         switch (id) {
@@ -30,7 +34,7 @@ const Zzfx: React.FC = () => {
                     <InitialValues
                         onParamsConfirm={e => {
                             if (e.some(x => x === -1)) {
-                                setInitialValues("未选择");
+                                setInitialValues("");
                                 return;
                             }
 
@@ -39,9 +43,9 @@ const Zzfx: React.FC = () => {
                     />
                 );
             case 2:
-
+                return <SelectAlgo1 onSelect={e => setAlgo1(e)} />;
             case 3:
-                return <></>;
+                return <SelectAlgo2 onSelect={e => setAlgo2(e)} />;
         }
     };
 
@@ -114,15 +118,17 @@ const Zzfx: React.FC = () => {
                                     </Descriptions.Item>
 
                                     <Descriptions.Item label="初值">
-                                        {initialValues}
+                                        {initialValues === ""
+                                            ? "未选择"
+                                            : initialValues}
                                     </Descriptions.Item>
 
                                     <Descriptions.Item label="真值发现算法">
-                                        未选择
+                                        {algo1 === "" ? "未选择" : algo1}
                                     </Descriptions.Item>
 
                                     <Descriptions.Item label="初值推荐算法">
-                                        未选择
+                                        {algo2 === "" ? "未选择" : algo2}
                                     </Descriptions.Item>
                                 </Descriptions>
 
@@ -132,10 +138,20 @@ const Zzfx: React.FC = () => {
                                     layout="vertical"
                                     column={1}>
                                     <Descriptions.Item label="推荐初值效果展示">
-                                        <img
-                                            className={styles.resultsItem}
-                                            src="./Zzfx/results.png"
-                                        />
+                                        {dataset === "" ||
+                                        initialValues === "" ||
+                                        algo1 === "" ||
+                                        algo2 === "" ? (
+                                            <Empty
+                                                className={styles.resultsEmpty}
+                                                description="请完成上方参数选择"
+                                            />
+                                        ) : (
+                                            <img
+                                                className={styles.resultsImg}
+                                                src="./Zzfx/results.png"
+                                            />
+                                        )}
                                     </Descriptions.Item>
                                 </Descriptions>
                             </Space>
