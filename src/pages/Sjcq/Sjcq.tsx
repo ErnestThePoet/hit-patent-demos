@@ -42,7 +42,7 @@ const Sjcq: React.FC = () => {
         <ConfigProvider
             theme={{
                 token: {
-                    colorPrimary: "#55adff"
+                    colorPrimary: "#49b804"
                 }
             }}>
             <Layout className={styles.layoutWrapper}>
