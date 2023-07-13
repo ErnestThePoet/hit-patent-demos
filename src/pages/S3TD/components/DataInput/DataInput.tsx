@@ -150,7 +150,7 @@ const ConfigParams: React.FC<ConfigParamsProps> = (
             </Space>
 
             <img
-                src="./mutation.png"
+                src="./S3TD/mutation.png"
                 width={400}
                 className={styles.imgMutation}
             />
